@@ -1,0 +1,165 @@
+Based on the code you shared, here's a comprehensive summary:
+Main Pages/Sections
+
+Home/Hero - Landing section with dramatic intro
+About - Purpose and mission explanation
+Workbooks - Product showcase with carousel
+For Individuals - Individual purchaser CTA
+For Masajid - Institutional/bulk orders section
+Contact - Get in touch section
+Footer - Brand info and copyright
+
+
+Core Requirements
+Functional Features:
+
+Smooth scroll navigation between sections
+Interactive carousel for workbook display (4 workbooks: Glorification of Knowledge, The Three Principles, The Four Principles, Kitab At-Tawheed)
+Carousel navigation (prev/next buttons + dot indicators)
+Auto-scrolling carousel (5-second intervals)
+Fade-in animations on scroll for sections
+WhatsApp floating button (fixed bottom-right)
+Responsive mobile design
+Contact buttons (Email + Request Samples)
+
+Technical Structure:
+
+Fixed navigation bar with hover effects
+Parallax mouse-move effects on decorative elements
+Intersection Observer for scroll animations
+Image lazy loading considerations
+Smooth anchor link scrolling
+
+
+Brand Identity
+Brand Name:
+
+متون (Arabic)
+Mutoon (English transliteration)
+
+Tagline/Mission:
+"Making Islamic Studies Accessible to Every Student of Knowledge"
+Core Brand Values:
+
+Accessibility - Breaking language barriers
+Authenticity - Direct from scholars' official websites, no additions
+Structure - Organized, guided learning
+Engagement - Interactive, hands-on workbooks
+Heritage - Preserving Islamic scholarship
+
+
+Brand Voice/Messaging
+Key Messages:
+About Section:
+
+"Islamic scholarship has been preserved in classical Arabic texts for centuries"
+"Language should never be a barrier between a student and their heritage"
+Credibility Statement: "We do not add anything from ourselves. Every piece of content is taken directly from official websites of the scholars"
+Positioning: "We serve as a bridge, not an interpreter"
+
+Value Propositions:
+
+Structured, interactive workbooks (not just translations)
+Side-by-side Arabic/English format
+Dedicated note-taking spaces
+QR codes to scholar lessons
+Keyword tables
+Personal summary sections
+
+Emotional Appeal:
+
+"Each workbook becomes a precious artifact of your learning journey—your notes, your reflections, your growth"
+"Building a personal library of knowledge that becomes part of your journey toward Allah"
+"Study Islamic sciences at your own pace, organically"
+
+
+Target Audiences
+Primary:
+
+Individual Learners - Students of knowledge, non-Arabic speakers
+Masajid & Institutes - For structured programs
+
+Use Cases:
+
+Conferences (attendee materials)
+Study Circles (halaqaat)
+Weekend Schools (curriculum)
+Personal study
+Bulk orders for events
+
+
+Design Language
+Original Color Palette:
+
+Navy blue (#0a1628, #1a2840) - Primary dark
+Gold/Bronze (#c9a962, #e3ca8a) - Accent
+Cream/Beige (#e8dfd8, #faf7f2) - Light backgrounds
+Dark text (#0a1628, #2a2a2a)
+
+Typography:
+
+Arabic: 'Amiri' (serif) - For Arabic text and main logo
+Display Headings: 'Cinzel' (serif) - Elegant, classical
+Body Text: 'Cormorant Garamond' (serif) - Readable, sophisticated
+
+Design Principles:
+
+Elegant & Scholarly - Premium, traditional aesthetic
+Minimalist Luxury - Clean with purposeful decoration
+Cultural Sensitivity - Islamic geometric patterns, Arabic calligraphy
+Academic Gravitas - Serious but approachable
+
+Visual Elements:
+
+Geometric decorative corners
+Gradient gold accents
+Floating/parallax background elements
+Subtle animations and transitions
+Islamic pattern inspiration (implied through line work)
+
+
+Product Features (Workbook Structure)
+
+Color-coded side-by-side format - Arabic matn + English translation
+Structured notebook sections - Clear divisions with note spaces
+QR codes - Links to relevant audio/video lessons
+Keyword tables - Essential vocabulary reference
+Personal summary spaces - For reflections
+
+
+Brand Tone
+
+Reverent but not preachy
+Educational but not condescending
+Warm and inviting
+Professional and trustworthy
+Empowering - "You can do this"
+Authentic - Direct, honest about sourcing
+
+
+Key Differentiators
+
+Not just translation - Interactive learning tools
+Official sources only - Credibility through authenticity
+Format innovation - Workbook vs. PDF/book
+Accessibility focus - Bridge for non-Arabic speakers
+Personal growth - Your learning journey, your notes
+
+
+Call-to-Actions
+
+"Explore Collection"
+"Order Now"
+"Get Your Custom Quote" (bulk orders)
+"Email Us"
+"Request Samples"
+WhatsApp contact
+
+
+Contact Information
+
+Email: contact@mutoon.org
+WhatsApp: +447552908868
+Copyright: © 2025 Mutoon
+
+This brand is positioned as a premium, authentic bridge between classical Islamic scholarship and modern English-speaking students, with a focus on interactive, structured learning rather than passive reading.

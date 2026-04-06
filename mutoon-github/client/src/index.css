@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-arabic: 'Scheherazade New', 'Amiri', serif;
+  --font-arabic-modern: 'Amiri', serif;
+  --font-sans: 'Source Sans 3', sans-serif;
+
+  /* Warm cream/parchment background */
+  --background: 40 30% 96%;
+  --foreground: 25 30% 15%;
+
+  /* Slightly warmer card */
+  --card: 38 35% 93%;
+  --card-foreground: 25 30% 15%;
+  --card-border: 30 20% 85%;
+
+  --popover: 38 35% 93%;
+  --popover-foreground: 25 30% 15%;
+  --popover-border: 30 20% 85%;
+
+  /* Dark brown text */
+  --primary: 25 35% 20%;
+  --primary-foreground: 40 30% 96%;
+
+  /* Sepia brown accent */
+  --secondary: 30 40% 45%;
+  --secondary-foreground: 40 30% 96%;
+
+  /* Muted warm gray */
+  --muted: 35 15% 88%;
+  --muted-foreground: 25 15% 45%;
+
+  /* Warm brown accent */
+  --accent: 28 45% 35%;
+  --accent-foreground: 40 30% 96%;
+
+  --destructive: 0 65% 50%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 30 20% 85%;
+  --input: 35 20% 90%;
+  --ring: 28 45% 35%;
+
+  --sidebar: 35 25% 94%;
+  --sidebar-foreground: 25 30% 15%;
+  --sidebar-border: 30 20% 85%;
+  --sidebar-primary: 28 45% 35%;
+  --sidebar-primary-foreground: 40 30% 96%;
+  --sidebar-accent: 30 40% 45%;
+  --sidebar-accent-foreground: 40 30% 96%;
+  --sidebar-ring: 28 45% 35%;
+
+  --chart-1: 28 45% 35%;
+  --chart-2: 150 30% 40%;
+  --chart-3: 25 40% 50%;
+  --chart-4: 35 35% 55%;
+  --chart-5: 20 25% 45%;
+
+  --radius: 0.25rem;
+
+  --button-outline: rgba(0,0,0, .08);
+  --badge-outline: rgba(0,0,0, .05);
+  --opaque-button-border-intensity: 5;
+  --elevate-1: rgba(0,0,0, .02);
+  --elevate-2: rgba(0,0,0, .05);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-wide font-medium;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-arabic {
+    font-family: var(--font-arabic);
+  }
+
+  .font-arabic-modern {
+    font-family: var(--font-arabic-modern);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Library illustration background */
+  .bg-library {
+    background-image: url('/attached_assets/image_1769909210137.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .bg-library-overlay {
+    background: linear-gradient(
+      to bottom,
+      hsl(40 30% 96% / 0.92) 0%,
+      hsl(40 30% 96% / 0.85) 50%,
+      hsl(40 30% 96% / 0.95) 100%
+    );
+  }
+
+  /* Subtle parchment texture pattern */
+  .pattern-parchment {
+    background-image: 
+      radial-gradient(circle at 20% 30%, hsl(30 25% 88% / 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(35 20% 85% / 0.3) 0%, transparent 50%);
+  }
+
+  /* Subtle line pattern like architectural drawings */
+  .pattern-lines {
+    background-image: 
+      linear-gradient(90deg, hsl(28 30% 60% / 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* ===== PROFESSIONAL ANIMATIONS ===== */
+
+  @keyframes fade-up {
+    from { 
+      opacity: 0; 
+      transform: translateY(30px);
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes line-reveal {
+    from { 
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    to { 
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+
+  @keyframes draw-in {
+    from {
+      stroke-dashoffset: 1000;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+
+  .animate-line-reveal {
+    animation: line-reveal 0.8s ease-out forwards;
+  }
+
+  /* Text styling */
+  .text-sepia {
+    color: hsl(28 45% 35%);
+  }
+
+  /* Elegant shadow for cards */
+  .shadow-soft {
+    box-shadow: 0 4px 20px rgba(30, 25, 20, 0.08), 0 2px 8px rgba(30, 25, 20, 0.04);
+  }
+
+  .shadow-elegant {
+    box-shadow: 0 10px 40px rgba(30, 25, 20, 0.1), 0 4px 15px rgba(30, 25, 20, 0.05);
+  }
+
+  /* Focus accessibility */
+  .focus-ring:focus-visible {
+    outline: 2px solid hsl(28 45% 35%);
+    outline-offset: 2px;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Luxury letter spacing */
+  .tracking-scholarly {
+    letter-spacing: 0.15em;
+  }
+
+  /* Decorative border */
+  .border-ornate {
+    border: 1px solid hsl(30 25% 75%);
+  }
+}
