@@ -10,7 +10,7 @@ import libraryBg from "@assets/image_1769909210137.png";
 const heroSlides = [
   {
     arabicTitle: "ثلاثة الأصول",
-    englishTitle: "The Three Principles",
+    englishTitle: "The Three Fundamental Principles",
     subtitle: "Al-Usool Ath-Thalatha"
   },
   {
