@@ -1,17 +1,5 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { insertContactRequestSchema, InsertContactRequest } from "@shared/schema";
-import { useCreateContactRequest } from "@/hooks/use-contact";
-import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 import { Loader2, Send } from "lucide-react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -22,140 +10,142 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+type Status = "idle" | "submitting" | "success" | "error";
+
 export function ContactForm() {
-  const { toast } = useToast();
-  const mutation = useCreateContactRequest();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [type, setType] = useState("individual");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const form = useForm<InsertContactRequest>({
-    resolver: zodResolver(insertContactRequestSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-      type: "individual",
-    },
-  });
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMsg("");
 
-  async function onSubmit(data: InsertContactRequest) {
     try {
-      await mutation.mutateAsync(data);
-      toast({
-        title: "Message Sent",
-        description: "We have received your inquiry and will respond shortly.",
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, type, message }),
       });
-      form.reset();
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message",
-      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message");
+      }
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setType("individual");
+      setMessage("");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Failed to send message");
     }
   }
 
+  if (status === "success") {
+    return (
+      <div className="text-center py-8">
+        <p className="font-display text-lg text-foreground mb-2">Message Sent</p>
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          We have received your inquiry and will respond shortly.
+        </p>
+        <button
+          onClick={() => setStatus("idle")}
+          className="mt-6 text-accent text-sm hover:underline focus-ring"
+        >
+          Send another message
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-sm font-medium text-foreground">Name</FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder="Your full name" 
-                    className="bg-background border-border focus:border-accent focus-accessible" 
-                    data-testid="input-name"
-                    {...field} 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-sm font-medium text-foreground">Email</FormLabel>
-                <FormControl>
-                  <Input 
-                    type="email" 
-                    placeholder="name@example.com" 
-                    className="bg-background border-border focus:border-accent focus-accessible" 
-                    data-testid="input-email"
-                    {...field} 
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-foreground">Name</label>
+          <Input
+            placeholder="Your full name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="bg-background border-border focus:border-accent focus-accessible"
+            data-testid="input-name"
           />
         </div>
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-foreground">Email</label>
+          <Input
+            type="email"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="bg-background border-border focus:border-accent focus-accessible"
+            data-testid="input-email"
+          />
+        </div>
+      </div>
 
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-sm font-medium text-foreground">I am representing</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="bg-background border-border focus:border-accent focus-accessible" data-testid="select-type">
-                    <SelectValue placeholder="Select one" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="individual">Myself (Individual)</SelectItem>
-                  <SelectItem value="institution">An Institution / Mosque</SelectItem>
-                  <SelectItem value="bookstore">Bookstore / Retailer</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">I am representing</label>
+        <Select value={type} onValueChange={setType}>
+          <SelectTrigger
+            className="bg-background border-border focus:border-accent focus-accessible"
+            data-testid="select-type"
+          >
+            <SelectValue placeholder="Select one" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="individual">Myself (Individual)</SelectItem>
+            <SelectItem value="institution">An Institution / Mosque</SelectItem>
+            <SelectItem value="bookstore">Bookstore / Retailer</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Message</label>
+        <Textarea
+          placeholder="How can we help you?"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+          className="bg-background border-border focus:border-accent min-h-[140px] resize-none focus-accessible"
+          data-testid="input-message"
         />
+      </div>
 
-        <FormField
-          control={form.control}
-          name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-sm font-medium text-foreground">Message</FormLabel>
-              <FormControl>
-                <Textarea 
-                  placeholder="How can we help you?" 
-                  className="bg-background border-border focus:border-accent min-h-[140px] resize-none focus-accessible" 
-                  data-testid="input-message"
-                  {...field} 
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      {status === "error" && (
+        <p className="text-sm text-destructive" role="alert">
+          {errorMsg}
+        </p>
+      )}
 
-        <button
-          type="submit"
-          disabled={mutation.isPending}
-          className="w-full bg-accent text-accent-foreground font-medium py-3 px-6 hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 focus-ring tracking-wide"
-          data-testid="button-submit"
-        >
-          {mutation.isPending ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" /> Sending...
-            </>
-          ) : (
-            <>
-              Send Message
-              <Send className="w-4 h-4" />
-            </>
-          )}
-        </button>
-      </form>
-    </Form>
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="w-full bg-accent text-accent-foreground font-medium py-3 px-6 hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 focus-ring tracking-wide"
+        data-testid="button-submit"
+      >
+        {status === "submitting" ? (
+          <>
+            <Loader2 className="w-4 h-4 animate-spin" /> Sending...
+          </>
+        ) : (
+          <>
+            Send Message
+            <Send className="w-4 h-4" />
+          </>
+        )}
+      </button>
+    </form>
   );
 }

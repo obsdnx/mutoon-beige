@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Glorification of Knowledge",
+    "arabicTitle": "تعظيم العلم",
+    "description": "A comprehensive guide to the etiquettes and virtues of seeking Islamic knowledge.",
+    "coverImage": "https://placehold.co/400x600/0a1628/c9a962?text=Glorification+of+Knowledge",
+    "price": 1500,
+    "amazonLink": "https://www.amazon.co.uk/dp/191928012X"
+  },
+  {
+    "id": 2,
+    "title": "The Three Principles",
+    "arabicTitle": "ثلاثة الأصول",
+    "description": "Fundamental principles of faith every Muslim should know.",
+    "coverImage": "https://placehold.co/400x600/0a1628/c9a962?text=The+Three+Principles",
+    "price": 1200,
+    "amazonLink": "https://www.amazon.co.uk/dp/1919280138"
+  },
+  {
+    "id": 3,
+    "title": "The Four Principles",
+    "arabicTitle": "القواعد الأربع",
+    "description": "Essential rules for understanding Tawheed and avoiding Shirk.",
+    "coverImage": "https://placehold.co/400x600/0a1628/c9a962?text=The+Four+Principles",
+    "price": 1000,
+    "amazonLink": null
+  },
+  {
+    "id": 4,
+    "title": "Nullifiers of Islam",
+    "arabicTitle": "نواقض الإسلام",
+    "description": "A study of the ten actions that nullify a person's Islam, based on the work of Imam Muhammad ibn Abd al-Wahhab.",
+    "coverImage": "https://placehold.co/400x600/0a1628/c9a962?text=Nullifiers+of+Islam",
+    "price": 1000,
+    "amazonLink": null
+  },
+  {
+    "id": 5,
+    "title": "40 Hadith Nawawi",
+    "arabicTitle": "الأربعين النووية",
+    "description": "A collection of forty fundamental hadiths compiled by Imam An-Nawawi covering the foundations of Islamic practice and belief.",
+    "coverImage": "https://placehold.co/400x600/0a1628/c9a962?text=40+Hadith+Nawawi",
+    "price": 1200,
+    "amazonLink": null
+  }
+]

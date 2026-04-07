@@ -1,4 +1,4 @@
-import { useWorkbooks } from "@/hooks/use-workbooks";
+import workbooksData from "@/data/workbooks.json";
 import { WorkbookCard } from "@/components/WorkbookCard";
 import { ContactForm } from "@/components/ContactForm";
 import { motion, AnimatePresence } from "framer-motion";
@@ -100,15 +100,10 @@ function TypewriterText({ text, className, isInView, speed = 60 }: { text: strin
 }
 
 export default function Home() {
-  const { data: rawWorkbooks, isLoading } = useWorkbooks();
-  const workbooks = useMemo(() => {
-    if (!rawWorkbooks) return rawWorkbooks;
-    return [...rawWorkbooks].sort((a, b) => {
-      const aAvailable = a.amazonLink ? 1 : 0;
-      const bAvailable = b.amazonLink ? 1 : 0;
-      return bAvailable - aAvailable;
-    });
-  }, [rawWorkbooks]);
+  const workbooks = useMemo(
+    () => [...workbooksData].sort((a, b) => (b.amazonLink ? 1 : 0) - (a.amazonLink ? 1 : 0)),
+    []
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -121,16 +116,12 @@ export default function Home() {
   }, []);
 
   const nextWorkbook = useCallback(() => {
-    if (workbooks) {
-      setWorkbookSlide((prev) => (prev + 1) % workbooks.length);
-    }
-  }, [workbooks]);
+    setWorkbookSlide((prev) => (prev + 1) % workbooks.length);
+  }, [workbooks.length]);
 
   const prevWorkbook = useCallback(() => {
-    if (workbooks) {
-      setWorkbookSlide((prev) => (prev - 1 + workbooks.length) % workbooks.length);
-    }
-  }, [workbooks]);
+    setWorkbookSlide((prev) => (prev - 1 + workbooks.length) % workbooks.length);
+  }, [workbooks.length]);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -483,7 +474,7 @@ export default function Home() {
             </div>
             
             {/* Carousel navigation */}
-            {workbooks && workbooks.length > 1 && (
+            {workbooks.length > 1 && (
               <motion.div 
                 className="flex items-center gap-3"
                 variants={staggerItem}
@@ -509,15 +500,7 @@ export default function Home() {
           </motion.div>
 
           {/* Workbooks Carousel */}
-          {isLoading ? (
-            <div className="flex justify-center py-16">
-              <motion.div 
-                className="w-8 h-8 border-2 border-accent/30 border-t-accent rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              />
-            </div>
-          ) : workbooks && workbooks.length > 0 ? (
+          {workbooks.length > 0 ? (
             <div className="relative overflow-hidden">
               <motion.div 
                 className="flex gap-6"
@@ -686,7 +669,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">WhatsApp</p>
-                      <p className="text-foreground">+44 7552 908868</p>
+                      <p className="text-foreground">+44 7386 302578</p>
                     </div>
                   </div>
                 </motion.div>

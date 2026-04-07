@@ -1,4 +1,3 @@
-import { Workbook } from "@shared/schema";
 import { motion } from "framer-motion";
 import { BookOpen, ShoppingCart } from "lucide-react";
 
@@ -15,6 +14,16 @@ const coverMap: Record<string, string> = {
   "40 Hadith Nawawi": cover40hw,
   "Glorification of Knowledge": coverGlory,
 };
+
+interface Workbook {
+  id: number;
+  title: string;
+  arabicTitle: string;
+  description: string;
+  coverImage: string;
+  price: number | null;
+  amazonLink: string | null;
+}
 
 interface WorkbookCardProps {
   workbook: Workbook;
